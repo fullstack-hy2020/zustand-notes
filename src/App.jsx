@@ -22,7 +22,7 @@ const App = () => {
       <ul>
         {notes.map(note => (
           <li key={note.id}>
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+            {note.important ? <strong>{note.content}</strong> : note.content}
           </li>
         ))}
       </ul>
