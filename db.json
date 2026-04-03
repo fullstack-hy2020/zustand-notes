@@ -16,9 +16,9 @@
       "important": true
     },
     {
-      "content": "Who needs context api",
-      "important": true,
-      "id": "JDkrM8ofboE"
+      "content": "Middleware can be used to enhance the store functionality\"",
+      "important": false,
+      "id": "USemrvHaG3g"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

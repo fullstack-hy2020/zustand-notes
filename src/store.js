@@ -1,7 +1,16 @@
 import { create } from 'zustand'
 import noteService from './services/notes'
 
-const useNoteStore = create((set) => ({
+const logger = (config) => (set, get) => config(
+  (...args) => {
+    console.log('prev state', get());
+    set(...args);
+    console.log('next state', get());
+  },
+  get
+);
+
+const useNoteStore = create(logger(set => ({
   notes: [],
   filter: '',
   actions: {
@@ -22,7 +31,7 @@ const useNoteStore = create((set) => ({
       set(() => ({ notes }))
     }
   }
-}))
+})))
 
 export const useNotes = () => useNoteStore(({ notes, filter }) => {
   if (filter === 'important') return notes.filter(n => n.important)
