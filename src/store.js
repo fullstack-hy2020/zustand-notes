@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { useShallow } from 'zustand/react/shallow'
 
 const useNoteStore = create((set) => ({
   notes: [],
@@ -19,10 +20,10 @@ const useNoteStore = create((set) => ({
   }
 }))
 
-export const useNotes = () => useNoteStore(({ notes, filter }) => {
+export const useNotes = () => useNoteStore(useShallow(({ notes, filter }) => {
   if (filter === 'important') return notes.filter(n => n.important)
   if (filter === 'nonimportant') return notes.filter(n => !n.important)
   return notes
-})
+}))
 export const useFilter = () => useNoteStore((state) => state.filter)
 export const useNoteActions = () => useNoteStore((state) => state.actions)
