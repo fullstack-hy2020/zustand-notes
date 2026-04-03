@@ -33,10 +33,12 @@ const useNoteStore = create(logger(set => ({
   }
 })))
 
-export const useNotes = () => useNoteStore(({ notes, filter }) => {
+export const useNotes = () => {
+  const notes = useNoteStore((state) => state.notes)
+  const filter = useNoteStore((state) => state.filter)
   if (filter === 'important') return notes.filter(n => n.important)
   if (filter === 'nonimportant') return notes.filter(n => !n.important)
   return notes
-})
+}
 export const useFilter = () => useNoteStore((state) => state.filter)
 export const useNoteActions = () => useNoteStore((state) => state.actions)
