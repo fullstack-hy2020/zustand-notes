@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import noteService from './services/notes'
 
-const useNoteStore = create((set) => ({
+const useNoteStore = create((set, get) => ({
   notes: [],
   filter: '',
   actions: {
@@ -10,7 +10,7 @@ const useNoteStore = create((set) => ({
       set(state => ({ notes: state.notes.concat(newNote) }))
     },
     toggleImportance: async (id) => {
-      const note = useNoteStore.getState().notes.find(n => n.id === id)
+      const note = get().notes.find(n => n.id === id)
       const updated = await noteService.update(id, { ...note, important: !note.important })
       set(state => ({
         notes: state.notes.map(n => n.id === id ? updated : n)
