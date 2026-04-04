@@ -33,6 +33,8 @@ const useNoteStore = create(logger(set => ({
   }
 })))
 
+export default useNoteStore
+
 export const useNotes = () => {
   const notes = useNoteStore((state) => state.notes)
   const filter = useNoteStore((state) => state.filter)
